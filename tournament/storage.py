@@ -27,7 +27,7 @@ def validate_tournament_data(data):
     if not required_keys.issubset(data):
         raise ValueError("Tournament data is missing required fields.")
 
-    if data["schema_version"] != 1:
+    if type(data["schema_version"]) is not int or data["schema_version"] != 1:
         raise ValueError("Unsupported tournament schema version.")
 
     if type(data["next_team_number"]) is not int:
@@ -106,6 +106,11 @@ def validate_fixtures(fixtures, teams):
     }
 
     for fixture in fixtures:
+        expected_fixture_count = len(teams) * (len(teams) - 1) // 2
+
+        if fixtures and len(fixtures) != expected_fixture_count:
+            raise ValueError("Tournament fixture schedule is incomplete.")
+
         if not isinstance(fixture, dict):
             raise ValueError("Each fixture must be a dictionary.")
 
@@ -124,6 +129,9 @@ def validate_fixtures(fixtures, teams):
 
         if fixture_id in fixture_ids:
             raise ValueError("Duplicate fixture ID.")
+
+        if not isinstance(team1_id, str) or not isinstance(team2_id, str):
+            raise ValueError("Fixture team IDs must be text.")
 
         if team1_id not in team_ids or team2_id not in team_ids:
             raise ValueError("Fixture references an unknown team.")
