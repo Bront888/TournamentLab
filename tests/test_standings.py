@@ -114,8 +114,8 @@ class TestStandings(unittest.TestCase):
         standings["TM001"]["points"] = 6
         standings["TM002"]["points"] = 6
 
-        standings["TM001"]["goal_difference"] = 3
-        standings["TM002"]["goal_difference"] = 5
+        standings["TM001"]["goal_diff"] = 3
+        standings["TM002"]["goal_diff"] = 5
 
         ranked = rank_standings(standings)
 
@@ -127,7 +127,7 @@ class TestStandings(unittest.TestCase):
 
         for team_id in ("TM001", "TM002"):
             standings[team_id]["points"] = 6
-            standings[team_id]["goal_difference"] = 3
+            standings[team_id]["goal_diff"] = 3
 
         standings["TM001"]["goals_for"] = 12
         standings["TM002"]["goals_for"] = 15
