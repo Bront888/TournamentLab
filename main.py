@@ -31,12 +31,20 @@ def display_menu():
     print("==================================")
 
 def get_user_choice():
-    choice = input("Enter your choice [1-9] :)  ")
+    choice = input("Enter your choice [1-9] :)  ").strip()
+    if choice not in ("1", "2", "3", "4", "5", "6", "7", "8", "9"):
+        raise ValueError("Invalid choice. Please select a number from 1 to 9.")
+
     return choice
+
 
 def handle_team_registration():
     global next_team_number
 
+    if fixtures:
+        print("Team registration is closed because fixtures have been generated.")
+        return
+    
     name = input("Enter team name: ")
 
     try:
@@ -199,7 +207,12 @@ def handle_load_tournament():
 def main():
     while True:
         display_menu()
-        choice = get_user_choice()
+
+        try:
+            choice = get_user_choice()
+        except ValueError as error:
+            print(error)
+            continue
 
         if choice == "1":
             handle_team_registration()
@@ -228,9 +241,6 @@ def main():
         elif choice == "9":
             print("Thank you for using TournamentLab!")
             break
-
-        else:
-            print("Feature coming soon.")
 
 
 if __name__ == "__main__":

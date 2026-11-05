@@ -1,0 +1,72 @@
+{
+    "schema_version": 1,
+    "next_team_number": 5,
+    "teams": [
+        {
+            "id": "TM001",
+            "name": "Everton"
+        },
+        {
+            "id": "TM002",
+            "name": "Spur"
+        },
+        {
+            "id": "TM003",
+            "name": "Man united"
+        },
+        {
+            "id": "TM004",
+            "name": "Man city"
+        }
+    ],
+    "fixtures": [
+        {
+            "id": "FX001",
+            "team1_id": "TM001",
+            "team2_id": "TM002",
+            "status": "played",
+            "team1_score": 5,
+            "team2_score": 2
+        },
+        {
+            "id": "FX002",
+            "team1_id": "TM001",
+            "team2_id": "TM003",
+            "status": "played",
+            "team1_score": 6,
+            "team2_score": 9
+        },
+        {
+            "id": "FX003",
+            "team1_id": "TM001",
+            "team2_id": "TM004",
+            "status": "played",
+            "team1_score": 3,
+            "team2_score": 1
+        },
+        {
+            "id": "FX004",
+            "team1_id": "TM002",
+            "team2_id": "TM003",
+            "status": "played",
+            "team1_score": 1,
+            "team2_score": 2
+        },
+        {
+            "id": "FX005",
+            "team1_id": "TM002",
+            "team2_id": "TM004",
+            "status": "played",
+            "team1_score": 4,
+            "team2_score": 3
+        },
+        {
+            "id": "FX006",
+            "team1_id": "TM003",
+            "team2_id": "TM004",
+            "status": "played",
+            "team1_score": 6,
+            "team2_score": 9
+        }
+    ]
+}
