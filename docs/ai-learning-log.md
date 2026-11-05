@@ -120,10 +120,10 @@ I calculated the table for these three matches:
 My hand calculation was:
 
 | Team | Played | Wins | Draws | Losses | Points |
-|---|---:|---:|---:|---:|---:|
-| Green | 2 | 1 | 1 | 0 | 4 |
-| Red | 2 | 1 | 0 | 1 | 3 |
-| Blue | 2 | 0 | 1 | 1 | 1 |
+|  --- |  ---:  |  ---:|   ---:|    ---:|    ---:|
+| Green|    2   |   1  |   1   |   0    |    4   |
+|  Red |    2   |   1  |   0   |   1    |    3   |
+| Blue |    2   |   0  |   1   |   1    |    1   |
 
 ### Actual result
 
