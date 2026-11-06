@@ -1,6 +1,8 @@
 import unittest
 
 from tournament.standings import initialize_standings, calculate_standings, rank_standings, get_tournament_status, get_champion
+from tournament.fixtures import generate_fixtures
+from tournament.results import record_result
 
 class TestStandings(unittest.TestCase):
 
@@ -210,6 +212,65 @@ class TestStandings(unittest.TestCase):
 
     def test_empty_tournament_is_not_started(self):
         self.assertEqual(get_tournament_status([]), "not_started")
+
+    def test_win_awards_three_points_and_loss_zero(self):
+        fixtures = [
+            {
+                "id": "FX001",
+                "team1_id": "TM001",
+                "team2_id": "TM002",
+                "status": "played",
+                "team1_score": 3,
+                "team2_score": 1
+            }
+        ]
+
+        standings = calculate_standings(self.teams, fixtures)
+
+        red = standings["TM001"]
+        blue = standings["TM002"]
+
+        self.assertEqual(red["won"], 1)
+        self.assertEqual(red["points"], 3)
+        self.assertEqual(blue["lost"], 1)
+        self.assertEqual(blue["points"], 0)
+
+    def test_champion_waits_for_all_six_fixtures(self):
+        teams = [
+            {"id": "TM001", "name": "Thunder"},
+            {"id": "TM002", "name": "Comets"},
+            {"id": "TM003", "name": "Phoenix"},
+            {"id": "TM004", "name": "Rockets"},
+        ]
+
+        fixtures = generate_fixtures(teams)
+
+        self.assertEqual(len(fixtures), 6)
+
+        for fixture in fixtures[:5]:
+            record_result(
+                fixtures,
+                fixture["id"],
+                2,
+                1
+            )
+
+        standings = calculate_standings(teams, fixtures)
+
+        self.assertIsNone(get_champion(standings, fixtures))
+
+
+        record_result(
+            fixtures,
+            fixtures[5]["id"],
+            1,
+            1
+        )
+
+        champion = get_champion(standings, fixtures)
+
+        self.assertIsNotNone(champion)
+        self.assertEqual(champion["team_id"], "TM001")
 
     if __name__ == "__main__":
         unittest.main()
